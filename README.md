@@ -26,3 +26,5 @@ ARTIST-NAME2/Album2<br>
 ARTIST-NAME3/Album3<br>
 ARTIST-NAME4/Album4
 </pre>
+<hr>
+<p>Next, run <code>main.py</code>. A file will appear called <code>links.txt</code> in your user directory.</p>
