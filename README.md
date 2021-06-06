@@ -1,8 +1,17 @@
 # deemix-foobar2000
 Converts foobar2000 curropted txt list to deezer album url
 <hr>
-<h3>Getting Started</h3><br>
-<p>foobar out file will look like this:</p><br>
+<h3>Requirements</h3>
+<ul>
+  <li>Python3</li>
+  <li>request</li>
+  <li>bs4</li>
+ </ul>
+<h3>Getting Started</h3>
+<p>Installing Requirements:</p>
+<pre>pip install bs4</pre>
+<pre>pip install requests</pre><br>
+<p>foobar out file will look like this:</p>
 <pre>
 ARTIST-NAME1/Album1<br>
 
