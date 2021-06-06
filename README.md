@@ -19,3 +19,10 @@ ARTIST-NAME4/Album4
 >>> File name (foobar.txt):<br>
 >>> foo-out.txt<br>
 </pre>
+<p>Your foo-out file will now look like this:</p><br>
+<pre>
+ARTIST-NAME1/Album1<br>
+ARTIST-NAME2/Album2<br>
+ARTIST-NAME3/Album3<br>
+ARTIST-NAME4/Album4
+</pre>
