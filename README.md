@@ -13,4 +13,5 @@ ARTIST-NAME3/Album3<br>
 ARTIST-NAME4/Album4
 </pre>
 <p>First, place your out file in your user directory.</p>
-<pre>foo-out.txt</pre><p>to</p><pre>C:/User/Name/foo-out.txt</pre>
+<pre>C:/User/Name/foo-out.txt</pre>
+<p>Then, run <code>strip.py</code><p>
