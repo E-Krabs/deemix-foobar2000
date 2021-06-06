@@ -29,8 +29,12 @@ ARTIST-NAME4/Album4
 <hr>
 <h3>Main.py</h3>
 <p>Next, run <code>main.py</code>. A file will appear called <code>links.txt</code> in your user directory.</p><br>
-<h3>The Transfromation Process:</h3><br>
+<h3>The Transfromation Process</h3>
 <pre>ARTIST-NAME1/Album1</pre>
 <pre>ARTIST+NAME1%2FAlbum1</pre>
 <pre>https://html.duckduckgo.com/html/?q=site%3Adeezer.com+ARTIST+NAME1%2FAlbum1</pre>
 <pre>https://www.deezer.com/en/album/306125</pre>
+<hr>
+<h3>How it Works</h3>
+<p>Strips empty lines from foobar out file. Then, encodes url. Scrapes DuckDuckGo (site:deezer.com). Writes <code>href</code> to file.</p>
+<h1><b><i>Le Fin</i></b></h1>
