@@ -2,7 +2,7 @@
 Converts foobar2000 curropted txt list to deezer album url
 <hr>
 <h3>Getting Started</h3><br>
-<code>
+<pre>
 ARTIST-NAME1/Album1
 
 ARTIST-NAME2/Album2
