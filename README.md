@@ -14,4 +14,8 @@ ARTIST-NAME4/Album4
 </pre>
 <p>First, place your out file in your user directory.</p>
 <pre>C:/User/Name/foo-out.txt</pre>
-<p>Then, run <code>strip.py</code><p>
+<p>Then, run <code>strip.py</code>. You will be prompted to enter the name of your foo-out file.</p><br>
+>>> File name (foobar.txt):
+>>> foo-out.txt
+
+
