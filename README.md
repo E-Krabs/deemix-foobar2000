@@ -27,4 +27,10 @@ ARTIST-NAME3/Album3<br>
 ARTIST-NAME4/Album4
 </pre>
 <hr>
-<p>Next, run <code>main.py</code>. A file will appear called <code>links.txt</code> in your user directory.</p>
+<h3>Main.py</h3>
+<p>Next, run <code>main.py</code>. A file will appear called <code>links.txt</code> in your user directory.</p><br>
+<h3>The Transfromation Process:</h3><br>
+<pre>ARTIST-NAME1/Album1</pre>
+<pre>ARTIST+NAME1%2FAlbum1</pre>
+<pre>https://html.duckduckgo.com/html/?q=site%3Adeezer.com+ARTIST+NAME1%2FAlbum1</pre>
+<pre>https://www.deezer.com/en/album/306125</pre>
