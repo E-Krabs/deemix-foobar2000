@@ -38,3 +38,4 @@ ARTIST-NAME4/Album4
 <h3>How it Works</h3>
 <p>Strips empty lines from foobar out file. Then, encodes url. Scrapes DuckDuckGo (site:deezer.com). Writes <code>href</code> to file.</p>
 <h1><b><i>Le Fin</i></b></h1>
+<p>P.S. I have no idea how the foobar out file looks. I'm going off <a href="https://www.reddit.com/r/deemix/comments/nsvghm/how_replace_this_text_artistnamealbum_by_the/">this Reddit comment.
