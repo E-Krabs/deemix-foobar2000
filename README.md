@@ -4,7 +4,7 @@ Converts foobar2000 corrupted txt list to deezer album url. It's gonna run into 
 <h3>Requirements</h3>
 <ul>
   <li>Python3</li>
-  <li>request</li>
+  <li>requests</li>
   <li>bs4</li>
  </ul>
 <h3>Getting Started</h3>
