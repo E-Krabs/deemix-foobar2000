@@ -13,7 +13,7 @@ count = 0
 # Strips the newline character
 for line in lines:
 	count += 1
-	separate = '{}'.format(line.strip()).replace('/', '%20').replace(' ', '%20')
+	separate = '{}'.format(line.strip()).replace(' ', '%20').replace('/', '%20').replace('-', '%20').replace('_', '%20').replace('%2C', '%20').replace('&', '%26')
 	#print(separate)
 
 	content = urllib.request.urlopen('https://api.deezer.com/search/album/?q={0}&index=0&limit=1&output=xml'.format(separate))
