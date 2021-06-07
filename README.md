@@ -7,11 +7,13 @@ Converts foobar2000 corrupted txt list to deezer album url. It's gonna run into 
   <li>Python3</li>
   <li>requests</li>
   <li>bs4</li>
+  <li>lxml</li>
  </ul>
 <h3>Getting Started</h3>
 <p>Installing Requirements:</p>
 <pre>pip install bs4</pre>
-<pre>pip install requests</pre><br>
+<pre>pip install requests</pre>
+<pre>pip install lxml</pre><br>
 <p>foobar out file will look like this:</p>
 <pre>
 ARTIST-NAME1/Album1<br>
