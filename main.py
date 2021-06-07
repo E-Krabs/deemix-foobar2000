@@ -2,9 +2,12 @@ from bs4 import BeautifulSoup
 import urllib.request
 from urllib.request import Request, urlopen
 import random
+import os
 
-flac = open('foobar.txt', 'r')
-links = open('links.txt', 'w')
+path = os.getcwd()
+flac = open(path+'/'+'strip.txt', 'r')
+#print(flac)
+links = open(path+'/'+'links.txt', 'w')
 lines = flac.readlines()
 
 count = 0
