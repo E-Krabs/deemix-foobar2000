@@ -14,14 +14,7 @@ Converts foobar2000 corrupted txt list to deezer album url. It's gonna run into 
 <pre>pip install requests</pre>
 <strike><pre>pip install lxml</pre></strike><br>
 <p>foobar out file will look like this:</p>
-
-ARTIST-NAME1/Album1<br>
-
-ARTIST-NAME2/Album2<br>
-
-ARTIST-NAME3/Album3<br>
-
-ARTIST-NAME4/Album4
+<img src="https://raw.githubusercontent.com/NEDb-tk/deemix-foobar2000/main/images/foobar.PNG">
 
 <p>First, place your out file in your user directory.</p>
 <pre>C:/User/Name/foobar.txt</pre>
