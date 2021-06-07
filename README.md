@@ -1,21 +1,20 @@
 # deemix-foobar2000 | Under Construction (still)
 Converts foobar2000 corrupted txt list to deezer album url. It's gonna run into some errors (maybe (idk)).
-<hr>
 
 <h3>Requirements</h3>
 <ul>
   <li>Python3</li>
   <li>requests</li>
   <li>bs4</li>
-  <li>lxml</li>
+  <strike><li>lxml</li></strike>
  </ul>
 <h3>Getting Started</h3>
 <p>Installing Requirements:</p>
 <pre>pip install bs4</pre>
 <pre>pip install requests</pre>
-<pre>pip install lxml</pre><br>
+<strike><pre>pip install lxml</pre></strike><br>
 <p>foobar out file will look like this:</p>
-<pre>
+
 ARTIST-NAME1/Album1<br>
 
 ARTIST-NAME2/Album2<br>
@@ -23,21 +22,21 @@ ARTIST-NAME2/Album2<br>
 ARTIST-NAME3/Album3<br>
 
 ARTIST-NAME4/Album4
-</pre>
+
 <p>First, place your out file in your user directory.</p>
-<pre>C:/User/Name/foo-out.txt</pre>
-<p>Then, run <code>strip.py</code>. You will be prompted to enter the name of your foo-out file.</p><br>
+<pre>C:/User/Name/foobar.txt</pre>
+<p>Then, run <code>strip.py</code>. You will be prompted to enter the name of your foobar out file.</p><br>
 <pre>
 >>> File name (foobar.txt):<br>
 >>> foo-out.txt<br>
 </pre>
-<p>Your foo-out file will now look like this:</p><br>
-<pre>
+<p>A file called <code>strip.txt</code> will appear. It will look like this (No spaces in between):</p><br>
+
 ARTIST-NAME1/Album1<br>
 ARTIST-NAME2/Album2<br>
 ARTIST-NAME3/Album3<br>
 ARTIST-NAME4/Album4
-</pre>
+
 <hr>
 <h3>Main.py</h3>
 <p>Next, run <code>main.py</code>. A file will appear called <code>links.txt</code> in your user directory.</p><br>
