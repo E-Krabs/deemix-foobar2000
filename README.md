@@ -41,6 +41,6 @@ A file will appear called <code>links.txt</code> in this directory.</p><br>
 <pre>https://www.deezer.com/en/album/306125</pre>
 <hr>
 <h3>How it Works</h3>
-<p>Strips empty lines from foobar out file. Then, encodes url. Scrapes api.deezer.com/search/album/. Writes <code>href</code> to file.</p>
+<p>Strips empty lines from foobar out file. Then, encodes url. Scrapes api.deezer.com/search/album/. Writes <code>link</code> to file.</p>
 <h1><b><i>Le Fin</i></b></h1>
 <p>P.S. I have no idea how the foobar out file looks. I'm going off <a href="https://www.reddit.com/r/deemix/comments/nsvghm/how_replace_this_text_artistnamealbum_by_the/">this Reddit comment.
