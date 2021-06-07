@@ -1,4 +1,4 @@
-# deemix-foobar2000 | Under Construction (still)
+# deemix-foobar2000
 Converts foobar2000 corrupted txt list to deezer album url. It's gonna run into some errors (maybe (idk)).
 
 <h3>Requirements</h3>
