@@ -17,7 +17,7 @@ for line in lines:
         '_', ' ').replace('!', '').replace("'", ' ').replace('(', '').replace(')', '').replace('ö', 'o').replace('é', 'e').replace('è', 'e').replace('à', 'a').replace('ú', 'u')
 
 	encode = urllib.parse.quote(separate.strip())
-	print(encode)
+	#print(encode)
 
 	content = urllib.request.urlopen('https://api.deezer.com/search/album/?q={}&index=0&limit=1&output=xml'.format(encode))
 	read_content = content.read()
@@ -26,10 +26,18 @@ for line in lines:
 	for el in soup.select('root > data > album'):
 		link = el.link.text.strip()
 		title = el.title.text.strip()
-		print(link)
-		print(title)
-		links.write(link)
-		links.write('\n')
+
+	for el in soup.select('root'):
+		total = int(el.total.text.strip())
+		#print(total)
+		if total == 0:
+			print('No Result For: {}'.format(line.strip()))
+			links.write('No Result For: {}'.format(line.strip()))
+		else:
+			print(link + ' - ' + title)
+			links.write(link + ' - ' + title)
+			links.write('\n')
+
 
 flac.close()
 links.close()
