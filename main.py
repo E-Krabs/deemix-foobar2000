@@ -14,7 +14,7 @@ count = 0
 for line in lines:
 	count += 1
 	separate = '{}'.format(line.strip()).replace(' ', '%20')..replace('/', '%20').replace('-', '%20').replace('_', '%20').replace('@', '%40').replace('#', '%23').replace('$', '%24').replace('^', '%5E').replace('&', '%26').replace('*', '%2A').replace('=', '%3D').replace('+', "%2B")
-	print(separate)
+	#print(separate)
 
 	content = urllib.request.urlopen('https://api.deezer.com/search/album/?q={0}&index=0&limit=1&output=xml'.format(separate))
 	read_content = content.read()
