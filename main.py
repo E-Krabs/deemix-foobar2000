@@ -4,19 +4,22 @@ from urllib.request import Request, urlopen
 import os
 
 path = os.getcwd()
-flac = open(path+'/'+'strip.txt', 'r')
+flac = open(path+'/'+'strip.txt', 'r', encoding="utf8")
 #print(flac)
-links = open(path+'/'+'links.txt', 'w')
+links = open(path+'/'+'links.txt', 'w', encoding="utf8")
 lines = flac.readlines()
 
 count = 0
 # Strips the newline character
 for line in lines:
 	count += 1
-	separate = '{}'.format(line.strip()).replace(' ', '%20')..replace('/', '%20').replace('-', '%20').replace('_', '%20').replace('@', '%40').replace('#', '%23').replace('$', '%24').replace('^', '%5E').replace('&', '%26').replace('*', '%2A').replace('=', '%3D').replace('+', "%2B")
-	#print(separate)
+	separate = '{}'.format(line.strip()).replace(' ', ' ').replace('-', ' ').replace('/', ' - ').replace(
+        '_', ' ').replace('!', '').replace("'", ' ').replace('(', '').replace(')', '').replace('ö', 'o').replace('é', 'e').replace('è', 'e').replace('à', 'a').replace('ú', 'u')
 
-	content = urllib.request.urlopen('https://api.deezer.com/search/album/?q={0}&index=0&limit=1&output=xml'.format(separate))
+	encode = urllib.parse.quote(separate.strip())
+	print(encode)
+
+	content = urllib.request.urlopen('https://api.deezer.com/search/album/?q={}&index=0&limit=1&output=xml'.format(encode))
 	read_content = content.read()
 	soup = BeautifulSoup(read_content,'xml')
 
