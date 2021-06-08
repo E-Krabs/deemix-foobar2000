@@ -3,10 +3,10 @@ Converts foobar2000 corrupted txt list to deezer album url. It's gonna run into 
 
 <h3>Requirements</h3>
 <ul>
-  <li>Python3</li>
-  <li>requests</li>
-  <li>bs4</li>
-  <li>unidecode</li>
+  <li><a href="https://www.python.org/downloads/">Python3</a></li>
+  <li><a href="https://pypi.org/project/requests/">requests</a></li>
+  <li><a href="https://pypi.org/project/beautifulsoup4/">bs4</a></li>
+  <li><a href="https://pypi.org/project/Unidecode/">unidecode</a></li>
   <strike><li>lxml</li></strike>
  </ul>
 <h3>Getting Started</h3>
