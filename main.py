@@ -46,11 +46,10 @@ for line in lines:
 
 				if total == 0:
 					print('No Result For: {}'.format(line.strip()))
-					links.write('No Result For: {}'.format(line.strip()))
+					links.write('No Result For: {}'.format(line.strip()) + '\n')
 				else:
 					print(link + ' - ' + title)
-					links.write(link + ' - ' + title)
-					links.write('\n')
+					links.write(link + ' - ' + title + '\n')
 		else:
 			print(link + ' - ' + title)
 			links.write(link + ' - ' + title)
