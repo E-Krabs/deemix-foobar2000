@@ -6,12 +6,14 @@ Converts foobar2000 corrupted txt list to deezer album url. It's gonna run into 
   <li>Python3</li>
   <li>requests</li>
   <li>bs4</li>
+  <li>unidecode</li>
   <strike><li>lxml</li></strike>
  </ul>
 <h3>Getting Started</h3>
 <p>Installing Requirements:</p>
 <pre>pip install bs4</pre>
 <pre>pip install requests</pre>
+<pre>pip install unidecode</pre>
 <strike><pre>pip install lxml</pre></strike><br>
 <p>Your original foobar out file should look like this:</p>
 <img src="https://raw.githubusercontent.com/NEDb-tk/deemix-foobar2000/main/images/foobar.PNG">
