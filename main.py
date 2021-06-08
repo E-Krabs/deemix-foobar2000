@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import urllib.request
 from urllib.request import Request, urlopen
 import os
+from unidecode import unidecode
 
 path = os.getcwd()
 flac = open(path+'/'+'strip.txt', 'r', encoding="utf8")
@@ -13,11 +14,9 @@ count = 0
 # Strips the newline character
 for line in lines:
 	count += 1
-	separate = '{}'.format(line.strip()).replace(' ', ' ').replace('-', ' ').replace('/', ' - ').replace(
-        '_', ' ').replace('!', '').replace("'", ' ').replace('(', '').replace(')', '').replace('ö', 'o').replace('é', 'e').replace('è', 'e').replace('à', 'a').replace('ú', 'u')
-
-	encode = urllib.parse.quote(separate.strip())
-	#print(encode)
+	unaccented_string = unidecode(line.strip())
+	encode = urllib.parse.quote(unaccented_string.strip()) #convert ASCII to Unicode
+	print(encode)
 
 	content = urllib.request.urlopen('https://api.deezer.com/search/album/?q={}&index=0&limit=1&output=xml'.format(encode))
 	read_content = content.read()
