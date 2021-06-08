@@ -6,12 +6,11 @@ from unidecode import unidecode
 
 path = os.getcwd()
 flac = open(path+'/'+'strip.txt', 'r', encoding="utf8")
-#print(flac)
 links = open(path+'/'+'links.txt', 'w', encoding="utf8")
 lines = flac.readlines()
 
 count = 0
-# Strips the newline character
+#strips the newline character
 for line in lines:
 	count += 1
 	unaccented_string = unidecode(line.strip())
@@ -20,9 +19,6 @@ for line in lines:
 	artist_ascii, album_ascii = unaccented_string.split('/', 1) #split artist/album
 	artist_uni = urllib.parse.quote(artist_ascii.strip()) #convert ASCII to Unicode
 	album_uni = urllib.parse.quote(album_ascii.strip()) #convert ASCII to Unicode
-
-	print(artist_uni)
-	print(album_uni)
 
 	content = urllib.request.urlopen('https://api.deezer.com/search/album/?q=artist:"{0}"%20album:"{1}"&index=0&limit=1&output=xml'.format(artist_uni, album_uni))
 
@@ -36,7 +32,7 @@ for line in lines:
 	for el in soup.select('root'):
 		total = int(el.total.text.strip())
 
-		if total == 0:
+		if total == 0: #if no results return, fallback to the less strict method of searching
 			content = urllib.request.urlopen('https://api.deezer.com/search/album/?q={}&index=0&limit=1&output=xml'.format(encode))
 			read_content = content.read()
 			soup = BeautifulSoup(read_content,'xml')
