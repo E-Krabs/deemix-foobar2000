@@ -6,55 +6,110 @@ from unidecode import unidecode
 
 path = os.getcwd()
 flac = open(path+'/'+'strip.txt', 'r', encoding="utf8")
+#print(flac)
 links = open(path+'/'+'links.txt', 'w', encoding="utf8")
 lines = flac.readlines()
 
 count = 0
-#strips the newline character
+#strips the newline character.
 for line in lines:
 	count += 1
+
 	unaccented_string = unidecode(line.strip())
-	#print(unaccented_string)
-	encode = urllib.parse.quote(unaccented_string.strip()) #just encode artist/album (don't split)
-	artist_ascii, album_ascii = unaccented_string.split('/', 1) #split artist/album
-	artist_uni = urllib.parse.quote(artist_ascii.strip()) #convert ASCII to Unicode
-	album_uni = urllib.parse.quote(album_ascii.strip()) #convert ASCII to Unicode
+	strip = unaccented_string.split('/') #decompile to list
 
-	content = urllib.request.urlopen('https://api.deezer.com/search/album/?q=artist:"{0}"%20album:"{1}"&index=0&limit=1&output=xml'.format(artist_uni, album_uni))
+	#since we are only looking for tracks, albums, and artists, trash all other junk data.
+	#you could probally use CDx but it doesn't improve acuracy.
+	cd_count = 1 #if CDx is in the list, then remove it
+	while cd_count < 10:
+		cd = 'CD{}'.format(cd_count)
+		if cd in strip:
+			strip.remove(cd)
+		else:
+			cd_count += 1
 
-	read_content = content.read()
-	soup = BeautifulSoup(read_content,'xml')
+	#Deezer Advanced Search doesn't have any parameters for the track number. So burn it!
+	track_count = 0 #if the track number is in the list, then remove it.
+	while track_count < 40:
+		track = '%02d' % track_count
+		if track in strip:
+			strip.remove(track)
+		else:
+			track_count += 1
+	#print(strip) #check out what got removed.
 
-	for el in soup.select('root > data > album'):
-		link = el.link.text.strip()
-		title = el.title.text.strip()
+	if len(strip) == 3: #if the list contains the title (single track).
+		recomp = '' #converting list back to str bc im lazy (also, its easy (but its kinda messy (also, parenthesis! (uwu)))).
+		for i in strip:
+			recomp += ('{}/').format(i)
+		artist_ascii, album_ascii, title_ascii, *other = recomp.split('/')
+		title_uni = urllib.parse.quote(title_ascii) #convert ASCII to Unicode
+		#print(artist_ascii, album_ascii, title_ascii)
+	else:
+		recomp = ''
+		for i in strip:
+			recomp += ('{}/').format(i)
+		artist_ascii, album_ascii, *other = recomp.split('/')
+		#print(artist_ascii, album_ascii)
 
-	for el in soup.select('root'):
-		total = int(el.total.text.strip())
+	artist_uni = urllib.parse.quote(artist_ascii) #convert ASCII to Unicode
+	album_uni = urllib.parse.quote(album_ascii) #convert ASCII to Unicode
 
-		if total == 0: #if no results return, fallback to the less strict method of searching
-			content = urllib.request.urlopen('https://api.deezer.com/search/album/?q={}&index=0&limit=1&output=xml'.format(encode))
-			read_content = content.read()
-			soup = BeautifulSoup(read_content,'xml')
+	if 'title_uni' in locals(): #if there was a title in the list, search for it.
 
-			for el in soup.select('root > data > album'):
+		#print('https://api.deezer.com/search/?q=album:"{0}"%20track:"{1}"&index=0&limit=1&output=xml'.format(album_uni, title_uni))
+		content = urllib.request.urlopen('https://api.deezer.com/search/?q=album:"{0}"%20track:"{1}"&index=0&limit=1&output=xml'.format(album_uni, title_uni))
+		read_content = content.read()
+		soup = BeautifulSoup(read_content,'xml')
+
+		for el in soup.select('root > data > track'):
 				link = el.link.text.strip()
 				title = el.title.text.strip()
+		for el in soup.select('root'):
+			total = int(el.total.text.strip()) #get how many results.
 
-			for el in soup.select('root'):
-				total = int(el.total.text.strip())
+			if total == 0: #if we couldn't find that track, give up...
+				print("Couldn't Find Track: {}".format(title_ascii))
+				links.write("Couldn't Find Track: {}".format(title_ascii + '\n'))
 
-				if total == 0:
-					print('No Result For: {}'.format(line.strip()))
-					links.write('No Result For: {}'.format(line.strip()) + '\n')
-				else:
-					print(link + ' - ' + title)
-					links.write(link + ' - ' + title + '\n')
-		else:
-			print(link + ' - ' + title)
-			links.write(link + ' - ' + title)
-			links.write('\n')
+	else: #if title_uni doesn't exist, only the album and artist was provided
+		if artist_uni in ['easter'] and album_uni in ['egg']:
+			print('Wow! An Easter Egg!? In Open Code? Yes, I was bored.')
+			break
 
+		#print('https://api.deezer.com/search/album/?q=artist:"{0}"%20album:"{1}"&index=0&limit=1&output=xml'.format(artist_uni, album_uni))
+		content = urllib.request.urlopen('https://api.deezer.com/search/album/?q=artist:"{0}"%20album:"{1}"&index=0&limit=1&output=xml'.format(artist_uni, album_uni))
+		read_content = content.read()
+		soup = BeautifulSoup(read_content,'xml')
+
+		for el in soup.select('root > data > album'):
+			link = el.link.text.strip()
+			title = el.title.text.strip()
+
+		for el in soup.select('root'):
+			total = int(el.total.text.strip())
+
+			if total == 0: #if no results return, fallback to the less strict method of searching.
+				content = urllib.request.urlopen('https://api.deezer.com/search/album/?q={0}/{1}&index=0&limit=1&output=xml'.format(artist_uni, album_uni)) #i know i could .join but ¯\_ (ツ)_/¯
+				read_content = content.read()
+				soup = BeautifulSoup(read_content,'xml')
+
+				for el in soup.select('root > data > album'):
+					link = el.link.text.strip()
+					title = el.title.text.strip()
+
+				for el in soup.select('root'):
+					total = int(el.total.text.strip())
+
+					if total == 0: #if still no results, give up...
+						print("Couldn't Find Album: {}".format(line.strip()))
+						links.write('No Results For: {}'.format(line.strip()) + '\n')
+
+
+
+if 'link' in locals(): #just incase we couldn't locate a track/album.
+	print(link + ' - ' + title)
+	links.write(link + ' - ' + title + '\n')
 
 flac.close()
 links.close()
