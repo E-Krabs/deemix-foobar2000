@@ -105,9 +105,6 @@ for line in lines:
 						print("Couldn't Find Album: {}".format(line.strip()))
 						links.write('No Results For: {}'.format(line.strip()) + '\n')
 
-
-
-if 'link' in locals(): #just incase we couldn't locate a track/album.
 	print(link + ' - ' + title)
 	links.write(link + ' - ' + title + '\n')
 
