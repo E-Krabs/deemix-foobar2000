@@ -11,13 +11,14 @@ links = open(path+'/'+'links.txt', 'w', encoding="utf8")
 lines = flac.readlines()
 
 count = 0
+
 #strips the newline character.
 for line in lines:
 	count += 1
 
 	unaccented_string = unidecode(line.strip())
 	strip = unaccented_string.split('/') #decompile to list
-
+	print(unaccented_string)
 	#since we are only looking for tracks, albums, and artists, trash all other junk data.
 	#you could probally use CDx but it doesn't improve acuracy.
 	cd_count = 1 #if CDx is in the list, then remove it
@@ -54,10 +55,11 @@ for line in lines:
 
 	artist_uni = urllib.parse.quote(artist_ascii) #convert ASCII to Unicode
 	album_uni = urllib.parse.quote(album_ascii) #convert ASCII to Unicode
-
+	stop = False
+	
 	if 'title_uni' in locals(): #if there was a title in the list, search for it.
 
-		#print('https://api.deezer.com/search/?q=album:"{0}"%20track:"{1}"&index=0&limit=1&output=xml'.format(album_uni, title_uni))
+		print('https://api.deezer.com/search/?q=album:"{0}"%20track:"{1}"&index=0&limit=1&output=xml'.format(album_uni, title_uni))
 		content = urllib.request.urlopen('https://api.deezer.com/search/?q=album:"{0}"%20track:"{1}"&index=0&limit=1&output=xml'.format(album_uni, title_uni))
 		read_content = content.read()
 		soup = BeautifulSoup(read_content,'xml')
@@ -71,7 +73,7 @@ for line in lines:
 			if total == 0: #if we couldn't find that track, give up...
 				print("Couldn't Find Track: {}".format(title_ascii))
 				links.write("Couldn't Find Track: {}".format(title_ascii + '\n'))
-
+				stop = True
 	else: #if title_uni doesn't exist, only the album and artist was provided
 		if artist_uni in ['easter'] and album_uni in ['egg']:
 			print('Wow! An Easter Egg!? In Open Code? Yes, I was bored.')
@@ -105,8 +107,10 @@ for line in lines:
 						print("Couldn't Find Album: {}".format(line.strip()))
 						links.write('No Results For: {}'.format(line.strip()) + '\n')
 
-	print(link + ' - ' + title)
-	links.write(link + ' - ' + title + '\n')
-
+	if stop == False:
+		print(link + ' - ' + title)
+		links.write(link + ' - ' + title + '\n')
+	if 'title_uni' in locals():
+		del(title_uni)
 flac.close()
 links.close()
