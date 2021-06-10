@@ -18,7 +18,7 @@ for line in lines:
 
 	unaccented_string = unidecode(line.strip())
 	strip = unaccented_string.split('/') #decompile to list
-	print(unaccented_string)
+	#print(unaccented_string)
 	#since we are only looking for tracks, albums, and artists, trash all other junk data.
 	#you could probally use CDx but it doesn't improve acuracy.
 	cd_count = 1 #if CDx is in the list, then remove it
@@ -32,9 +32,12 @@ for line in lines:
 	#Deezer Advanced Search doesn't have any parameters for the track number. So burn it!
 	track_count = 0 #if the track number is in the list, then remove it.
 	while track_count < 40:
-		track = '%02d' % track_count
-		if track in strip:
-			strip.remove(track)
+		track_2d = '%02d' % track_count
+		track_3d = '%03d' % track_count
+		if track_2d in strip:
+			strip.remove(track_2d)
+		elif track_3d in strip:
+			strip.remove(track_3d)
 		else:
 			track_count += 1
 	#print(strip) #check out what got removed.
@@ -59,7 +62,7 @@ for line in lines:
 	
 	if 'title_uni' in locals(): #if there was a title in the list, search for it.
 
-		print('https://api.deezer.com/search/?q=album:"{0}"%20track:"{1}"&index=0&limit=1&output=xml'.format(album_uni, title_uni))
+		#print('https://api.deezer.com/search/?q=album:"{0}"%20track:"{1}"&index=0&limit=1&output=xml'.format(album_uni, title_uni))
 		content = urllib.request.urlopen('https://api.deezer.com/search/?q=album:"{0}"%20track:"{1}"&index=0&limit=1&output=xml'.format(album_uni, title_uni))
 		read_content = content.read()
 		soup = BeautifulSoup(read_content,'xml')
@@ -71,7 +74,7 @@ for line in lines:
 			total = int(el.total.text.strip()) #get how many results.
 
 			if total == 0: #if we couldn't find that track, give up...
-				print("Couldn't Find Track: {}".format(title_ascii))
+				#print("Couldn't Find Track: {}".format(title_ascii))
 				links.write("Couldn't Find Track: {}".format(title_ascii + '\n'))
 				stop = True
 	else: #if title_uni doesn't exist, only the album and artist was provided
