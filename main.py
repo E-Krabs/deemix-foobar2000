@@ -22,7 +22,7 @@ for line in lines:
 	#since we are only looking for tracks, albums, and artists, trash all other junk data.
 	#you could probally use CDx but it doesn't improve acuracy.
 	cd_count = 1 #if CDx is in the list, then remove it
-	while cd_count < 10:
+	while cd_count < 10: #bc whos got 10 cds?
 		cd = 'CD{}'.format(cd_count)
 		if cd in strip:
 			strip.remove(cd)
@@ -31,7 +31,7 @@ for line in lines:
 
 	#Deezer Advanced Search doesn't have any parameters for the track number. So burn it!
 	track_count = 0 #if the track number is in the list, then remove it.
-	while track_count < 40:
+	while track_count < 120: #bc whos got 120 tracks?
 		track_2d = '%02d' % track_count
 		track_3d = '%03d' % track_count
 		if track_2d in strip:
@@ -61,7 +61,6 @@ for line in lines:
 	stop = False
 	
 	if 'title_uni' in locals(): #if there was a title in the list, search for it.
-
 		#print('https://api.deezer.com/search/?q=album:"{0}"%20track:"{1}"&index=0&limit=1&output=xml'.format(album_uni, title_uni))
 		content = urllib.request.urlopen('https://api.deezer.com/search/?q=album:"{0}"%20track:"{1}"&index=0&limit=1&output=xml'.format(album_uni, title_uni))
 		read_content = content.read()
@@ -74,8 +73,8 @@ for line in lines:
 			total = int(el.total.text.strip()) #get how many results.
 
 			if total == 0: #if we couldn't find that track, give up...
-				#print("Couldn't Find Track: {}".format(title_ascii))
-				links.write("Couldn't Find Track: {}".format(title_ascii + '\n'))
+				print("Couldn't Find Track: {0} - {1}, {2}".format(title_ascii, artist_ascii, album_ascii))
+				links.write("Couldn't Find Track: {0} - {1}, {2}".format(title_ascii, artist_ascii, album_ascii + '\n'))
 				stop = True
 	else: #if title_uni doesn't exist, only the album and artist was provided
 		if artist_uni in ['easter'] and album_uni in ['egg']:
@@ -108,7 +107,7 @@ for line in lines:
 
 					if total == 0: #if still no results, give up...
 						print("Couldn't Find Album: {}".format(line.strip()))
-						links.write('No Results For: {}'.format(line.strip()) + '\n')
+						links.write("Couldn't Find Album: {}".format(line.strip()) + '\n')
 
 	if stop == False:
 		print(link + ' - ' + title)
