@@ -22,7 +22,7 @@ for line in lines:
 	#since we are only looking for tracks, albums, and artists, trash all other junk data.
 	#you could probally use CDx but it doesn't improve acuracy.
 	cd_count = 1 #if CDx is in the list, then remove it
-	while cd_count < 10: #bc whos got 10 cds?
+	while cd_count < 20: #bc whos got 20 cds?
 		cd = 'CD{}'.format(cd_count)
 		if cd in strip:
 			strip.remove(cd)
@@ -40,6 +40,13 @@ for line in lines:
 			strip.remove(track_3d)
 		else:
 			track_count += 1
+
+# ['Artist', 'Album', 'CDx', 'Num', 'Title1', 'Title2', 'Title3']
+# ['Artist', 'Album', 'Title1', 'Title2', 'Title3']
+
+	if len(strip) > 3: #if more than 3 items in list, assume everything after ['Album'] is the title.
+			title_ascii = strip[2:]
+			#print(title_ascii)
 	#print(strip) #check out what got removed.
 
 	if len(strip) == 3: #if the list contains the title (single track).
