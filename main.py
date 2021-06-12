@@ -34,9 +34,9 @@ for line in lines:
 	while track_count < 120: #bc whos got 120 tracks?
 		track_2d = '%02d' % track_count
 		track_3d = '%03d' % track_count
-		if track_2d in strip:
+		if track_2d in strip[2]:
 			strip.remove(track_2d)
-		elif track_3d in strip:
+		elif track_3d in strip[2]:
 			strip.remove(track_3d)
 		else:
 			track_count += 1
@@ -47,7 +47,7 @@ for line in lines:
 	if len(strip) > 3: #if more than 3 items in list, assume everything after ['Album'] is the title.
 			title_ascii = strip[2:]
 			#print(title_ascii)
-	#print(strip) #check out what got removed.
+	print(strip) #check out what got removed.
 
 	if len(strip) == 3: #if the list contains the title (single track).
 		recomp = '' #converting list back to str bc im lazy (also, its easy (but its kinda messy (also, parenthesis! (uwu)))).
@@ -55,20 +55,20 @@ for line in lines:
 			recomp += ('{}/').format(i)
 		artist_ascii, album_ascii, title_ascii, *other = recomp.split('/')
 		title_uni = urllib.parse.quote(title_ascii) #convert ASCII to Unicode
-		#print(artist_ascii, album_ascii, title_ascii)
+		print(artist_ascii, album_ascii, title_ascii)
 	else:
 		recomp = ''
 		for i in strip:
 			recomp += ('{}/').format(i)
 		artist_ascii, album_ascii, *other = recomp.split('/')
-		#print(artist_ascii, album_ascii)
+		print(artist_ascii, album_ascii)
 
 	artist_uni = urllib.parse.quote(artist_ascii) #convert ASCII to Unicode
 	album_uni = urllib.parse.quote(album_ascii) #convert ASCII to Unicode
 	stop = False
 	
 	if 'title_uni' in locals(): #if there was a title in the list, search for it.
-		#print('https://api.deezer.com/search/?q=album:"{0}"%20track:"{1}"&index=0&limit=1&output=xml'.format(album_uni, title_uni))
+		print('https://api.deezer.com/search/?q=album:"{0}"%20track:"{1}"&index=0&limit=1&output=xml'.format(album_uni, title_uni))
 		content = urllib.request.urlopen('https://api.deezer.com/search/?q=album:"{0}"%20track:"{1}"&index=0&limit=1&output=xml'.format(album_uni, title_uni))
 		read_content = content.read()
 		soup = BeautifulSoup(read_content,'xml')
@@ -88,7 +88,7 @@ for line in lines:
 			print('Wow! An Easter Egg!? In Open Code? Yes, I was bored.')
 			break
 
-		#print('https://api.deezer.com/search/album/?q=artist:"{0}"%20album:"{1}"&index=0&limit=1&output=xml'.format(artist_uni, album_uni))
+		print('https://api.deezer.com/search/album/?q=artist:"{0}"%20album:"{1}"&index=0&limit=1&output=xml'.format(artist_uni, album_uni))
 		content = urllib.request.urlopen('https://api.deezer.com/search/album/?q=artist:"{0}"%20album:"{1}"&index=0&limit=1&output=xml'.format(artist_uni, album_uni))
 		read_content = content.read()
 		soup = BeautifulSoup(read_content,'xml')
