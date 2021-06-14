@@ -12,6 +12,7 @@ lines = flac.readlines()
 
 count = 0
 
+#prepare for trash structure
 #strips the newline character.
 for line in lines:
 	count += 1
@@ -19,6 +20,7 @@ for line in lines:
 	unaccented_string = unidecode(line.strip())
 	strip = unaccented_string.split('/') #decompile to list
 	#print(unaccented_string)
+	#print(strip)
 	#since we are only looking for tracks, albums, and artists, trash all other junk data.
 	#you could probally use CDx but it doesn't improve acuracy.
 	cd_count = 1 #if CDx is in the list, then remove it
@@ -36,13 +38,17 @@ for line in lines:
 		track_3d = '%03d' % track_count
 		if track_2d in strip[2]:
 			strip.remove(track_2d)
+			break
 		elif track_3d in strip[2]:
 			strip.remove(track_3d)
+			break
 		else:
+			#print(track_count)
 			track_count += 1
 
-# ['Artist', 'Album', 'CDx', 'Num', 'Title1', 'Title2', 'Title3']
-# ['Artist', 'Album', 'Title1', 'Title2', 'Title3']
+	#print(strip)
+	#['Artist', 'Album', 'CDx', 'Num', 'Title1', 'Title2', 'Title3']
+	#['Artist', 'Album', 'Title1', 'Title2', 'Title3']
 
 	if len(strip) > 3: #if more than 3 items in list, assume everything after ['Album'] is the title.
 			title_ascii = strip[2:]
