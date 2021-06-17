@@ -44,5 +44,6 @@ A file will appear called <code>links.txt</code> in this directory.</p><br>
 <hr>
 <h3>How it Works</h3>
 <p>Strips empty lines from foobar out file. Then, encodes url. Scrapes api.deezer.com/search/album/. Writes <code>link</code> to file.</p>
-<p>Thanks <a href="https://developers.deezer.com/api">Deezer API!
+<p>To download all the albums/tracks in `links.txt`, use the <a href="https://www.reddit.com/r/deemix/comments/hmrhhs/download_links/">Deemix CLI</a>.
+<p>Thanks <a href="https://developers.deezer.com/api">Deezer API!</a>
 <h1><b><i>Le Fin</i></b></h1>
