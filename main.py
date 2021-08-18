@@ -31,7 +31,7 @@ for line in lines:
 		else:
 			cd_count += 1
 
-	#Deezer Advanced Search doesn't have any parameters for the track number. So burn it!
+	#Deezer Advanced Search doesn't have any parameters for the track number. So destroy it!
 	track_count = 0 #if the track number is in the list, then remove it.
 	while track_count < 120: #bc whos got 120 tracks?
 		track_2d = '%02d' % track_count
@@ -56,7 +56,7 @@ for line in lines:
 	#print(strip) #check out what got removed.
 
 	if len(strip) == 3: #if the list contains the title (single track).
-		recomp = '' #converting list back to str bc im lazy (also, its easy (but its kinda messy (also, parenthesis! (uwu)))).
+		recomp = '' #converting list back to str.
 		for i in strip:
 			recomp += ('{}/').format(i)
 		artist_ascii, album_ascii, title_ascii, *other = recomp.split('/')
@@ -73,7 +73,7 @@ for line in lines:
 	album_uni = urllib.parse.quote(album_ascii) #convert ASCII to Unicode
 	stop = False
 	
-	#i know i could be using defs but... ¯\_ (ツ)_/¯
+	#i know i could be using functions but... ¯\_ (ツ)_/¯
 	if 'title_uni' in locals(): #if there was a title in the list, search for it.
 		#print('https://api.deezer.com/search/?q=album:"{0}"%20track:"{1}"&index=0&limit=1&output=xml'.format(album_uni, title_uni))
 		content = urllib.request.urlopen('https://api.deezer.com/search/?q=album:"{0}"%20track:"{1}"&index=0&limit=1&output=xml'.format(album_uni, title_uni))
